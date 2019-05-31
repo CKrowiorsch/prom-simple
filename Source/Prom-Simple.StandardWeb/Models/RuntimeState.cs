@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Runtime.Remoting.Messaging;
 
 namespace Prom_Simple.StandardWeb.Models
 {
@@ -8,7 +7,6 @@ namespace Prom_Simple.StandardWeb.Models
         static State _state;
 
         public static State Current => _state ?? (_state = new State());
-
 
         public class State
         {

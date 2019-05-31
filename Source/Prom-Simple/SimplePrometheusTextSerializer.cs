@@ -15,7 +15,7 @@ namespace Prom_Simple
 
         readonly Dictionary<PropertyInfo, EntryInfo> _propertyCache = new Dictionary<PropertyInfo, EntryInfo>();
 
-        public SimplePrometheusTextSerializer<T> Initialize(string prefix)
+        public SimplePrometheusTextSerializer<T> Initialize(string prefix, Dictionary<string,string> globalLabels)
         {
             _prefix = prefix;
 
@@ -27,6 +27,10 @@ namespace Prom_Simple
 
                 var (name, description, type) = GetEntryInfo(propertyInfo);
                 var labels = ReadLabels(propertyInfo);
+                foreach (var keyValuePair in globalLabels)
+                {
+                    labels.Add(keyValuePair.Key, keyValuePair.Value);
+                }
 
                 var labelString = labels.Any() ? BuildLabelString(labels) : string.Empty;
 
@@ -54,7 +58,7 @@ namespace Prom_Simple
             builder.Append("{");
             foreach (var pair in labels)
             {
-                builder.Append($"{pair.Key}=\"{pair.Value}\"");
+                builder.Append($"{pair.Key}=\"{pair.Value}\",");
             }
 
             builder.Append("}");
@@ -63,13 +67,14 @@ namespace Prom_Simple
 
         public string Serialize(T state)
         {
+            var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             var builder = new StringBuilder();
 
             foreach (var entry in _propertyCache)
             {
                 var value = entry.Key.GetValue(state);
                 builder.Append(entry.Value.Fields);
-                builder.Append($"{entry.Value.ValuePrefix} {value}\n");
+                builder.Append($"{entry.Value.ValuePrefix} {value} {timestamp}\n");
             }
 
             return builder.ToString();

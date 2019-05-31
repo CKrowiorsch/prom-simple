@@ -15,7 +15,11 @@ namespace Prom_Simple.StandardWeb.Controllers
 
         public HomeController()
         {
-            _serializer = new SimplePrometheusTextSerializer<RuntimeState.State>().Initialize("test_project");
+            _serializer = new SimplePrometheusTextSerializer<RuntimeState.State>().Initialize("test_project", new Dictionary<string, string>()
+                {
+                    {"environment", "staging" }
+                }
+            );
         }
 
 
