@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Prom_Simple</RootNamespace>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.2;netcoreapp2.1;</TargetFrameworks>
+    <RootNamespace>Krowiorsch</RootNamespace>
   </PropertyGroup>
 
 </Project>
