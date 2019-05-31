@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Krowiorsch;
 
 namespace Prom_Simple
 {
@@ -15,8 +16,10 @@ namespace Prom_Simple
 
         readonly Dictionary<PropertyInfo, EntryInfo> _propertyCache = new Dictionary<PropertyInfo, EntryInfo>();
 
-        public SimplePrometheusTextSerializer<T> Initialize(string prefix, Dictionary<string,string> globalLabels)
+        public SimplePrometheusTextSerializer<T> Initialize(string prefix, Dictionary<string,string> globalLabels = null)
         {
+            globalLabels = globalLabels ?? new Dictionary<string, string>();
+
             _prefix = prefix;
 
             var props = ReadProperties(typeof(T));
@@ -89,10 +92,10 @@ namespace Prom_Simple
         {
             var name = $"{_prefix}_{SnakeNaming(info.Name)}".ToLowerInvariant();
 
-            var attributes = info.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            var attributes = info.GetCustomAttributes(typeof(PromDescription), false);
             var description = !attributes.Any()
                 ? string.Empty
-                : (attributes.First() as DescriptionAttribute).Description;
+                : (attributes.First() as PromDescription).Description;
 
             var typeAttribute = info.GetCustomAttributes(typeof(PromCounter), false);
 

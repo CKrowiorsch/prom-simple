@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Data.SqlTypes;
 
-namespace Prom_Simple
+namespace Krowiorsch
 {
     public class PromCounter : Attribute
     {
@@ -12,6 +11,17 @@ namespace Prom_Simple
     public class PromGauge : Attribute
     {
 
+    }
+
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class PromDescription : Attribute
+    {
+        public string Description { get; set; }
+
+        public PromDescription(string descrition)
+        {
+            Description = descrition;
+        }
     }
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
