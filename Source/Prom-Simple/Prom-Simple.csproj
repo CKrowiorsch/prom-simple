@@ -9,6 +9,7 @@
     <PackageProjectUrl>https://github.com/CKrowiorsch/prom-simple</PackageProjectUrl>
     <RepositoryUrl>git@github.com:CKrowiorsch/prom-simple.git</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <version>0.1.0</version>
   </PropertyGroup>
 
 </Project>
