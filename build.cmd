@@ -1,0 +1,1 @@
+dotnet build -c Release -v:m -clp:nosummary -o "%~dp0Build\Client" "Source\Prom-Simple\Prom-Simple.csproj" -nologo
