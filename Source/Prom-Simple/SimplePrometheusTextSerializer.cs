@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Krowiorsch;
 
-namespace Prom_Simple
+namespace Krowiorsch
 {
     public class SimplePrometheusTextSerializer<T>
     {
